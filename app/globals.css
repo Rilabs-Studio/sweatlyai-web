@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
+/* ── SweatlyAI "electric night" design tokens ──────────────────────────── */
+@theme {
+  --color-bg: #0a0a0f;
+  --color-surface: #15151c;
+  --color-surface-hi: #1d1d26;
+  --color-volt: #d4ff3f;
+  --color-flame: #ff6b35;
+  --color-ink: #ffffff;
+  --color-ink-dim: #9a9aa8;
+
+  /* Sport identity colors */
+  --color-running: #e8590c;
+  --color-cycling: #3b5bdb;
+  --color-swimming: #1098ad;
+  --color-walking: #66a80f;
+  --color-hiking: #c05621;
+  --color-strength: #7048e8;
+  --color-yoga: #d6336c;
+
+  /* Heart-rate zones (cool → hot) */
+  --color-hr1: #3782e3;
+  --color-hr2: #10a679;
+  --color-hr3: #e6ab02;
+  --color-hr4: #e8590c;
+  --color-hr5: #c9213e;
+
+  --font-sans: var(--font-nunito), ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+
+  --radius-card: 24px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --stroke: rgba(255, 255, 255, 0.08);
+  --stroke-strong: rgba(255, 255, 255, 0.14);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Tabular figures for stats/numbers */
+.tnum {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Uppercase micro-label — mirrors the app's `Eyebrow` */
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: var(--color-ink-dim);
+}
+
+/* Card — surface + hairline stroke, 24px continuous radius */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-card);
+}
+
+/* Glassmorphic floating control — nav, chips, buttons */
+.glass {
+  background: rgba(29, 29, 38, 0.55);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid var(--stroke-strong);
+}
+
+/* Volt radial glow (mirrors the app icon's glow) */
+.volt-glow {
+  background: radial-gradient(
+    closest-side,
+    rgba(212, 255, 63, 0.28),
+    rgba(212, 255, 63, 0.06) 60%,
+    transparent 100%
+  );
+}
+
+/* Hairline section separator */
+.hairline {
+  border-color: var(--stroke);
+}
+
+/* Hide scrollbar on horizontal scroll strips */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-floaty {
+    animation: none;
+  }
 }
