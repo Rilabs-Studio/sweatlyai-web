@@ -403,17 +403,17 @@ const LangContext = createContext<Ctx | null>(null);
 const STORAGE_KEY = "sweatly-lang";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("id");
+  const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
     // Sync the persisted preference from localStorage after mount (avoids an
-    // SSR hydration mismatch by starting from the default "id" on the server).
+    // SSR hydration mismatch by starting from the default "en" on the server).
     const stored = window.localStorage.getItem(STORAGE_KEY) as Lang | null;
     if (stored === "id" || stored === "en") {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLangState(stored);
     }
-    document.documentElement.lang = stored ?? "id";
+    document.documentElement.lang = stored ?? "en";
   }, []);
 
   const setLang = (l: Lang) => {

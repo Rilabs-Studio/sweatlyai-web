@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${nunito.variable} h-full`} suppressHydrationWarning>
+    <html lang="en" className={`${nunito.variable} h-full`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
         <LanguageProvider>{children}</LanguageProvider>
       </body>
